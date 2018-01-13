@@ -4,7 +4,12 @@ import { bindActionCreators } from 'redux';
 import { fetchMovieList } from '../actions/fetchMovieList';
 
 class FetchedListOfMovies extends Component {
+  
+  componentWillMount(){
+    this.props.fetchMovieList().then((a)=>{console.log(a);});
+  }
   render() {
+    
     return (
       <div>
       USER MOVIE LIST

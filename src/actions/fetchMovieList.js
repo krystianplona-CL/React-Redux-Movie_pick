@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-const API_KEY = '7000d45e';
-const ROOT_URL = `http://www.omdbapi.com/?apikey=${API_KEY}`;
+const API_KEY = '';
+const ROOT_URL = `https://movie-picker-ff027.firebaseio.com/.json`;
 
-export const FETCH_MOVIE_LIST = 'FETCH_MOVIE';
+export const FETCH_MOVIE_LIST = 'FETCH_MOVIE_LIST';
 
-export function fetchMovieList(movie) {
-  const url = `${ROOT_URL}&t=${movie}`;
-  const request = axios.get(url);
+export function fetchMovieList() {
+  const request = axios.get(ROOT_URL);
   
   return {
     type: FETCH_MOVIE_LIST,
