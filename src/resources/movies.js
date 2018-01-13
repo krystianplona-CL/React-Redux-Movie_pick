@@ -15,4 +15,4 @@ const movies = [
     name: 'Movie_4',
     release_date: '2002'
   }
-]
+];

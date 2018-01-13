@@ -8,6 +8,7 @@ class MainPage extends Component {
       <div>
         Welcome! Find your favourite movie and add it to you list.
         <SearchBar />
+        
       </div>
     );
   }
