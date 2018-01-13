@@ -6,7 +6,10 @@ import { fetchSelectedMovie } from '../actions/fetchSelectedMovie';
 class SearchBar extends Component {
   constructor(props){
     super(props);
-    this.state = { input: '' }
+    this.state = { 
+      input: '',
+      inputPlaceholder: 'Get a movie details'
+    }
     
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -20,7 +23,14 @@ class SearchBar extends Component {
     event.preventDefault();
 
     //get typed movie
-    this.props.fetchSelectedMovie(this.state.input);
+    this.props.fetchSelectedMovie(this.state.input).then((response)=>{
+      if(response.payload.data.Response === 'False'){
+        this.setState({ inputPlaceholder: 'Wrong title'})
+      }
+      else{
+        this.setState({ inputPlaceholder: 'Get a movie details'})
+      }
+    });
     this.setState({ input: '' });
   }
   
@@ -28,7 +38,7 @@ class SearchBar extends Component {
     return (
       <form onSubmit={this.onFormSubmit} className="input-group">
         <input 
-          placeholder="Get a movie details"
+          placeholder={this.state.inputPlaceholder}
           className="form-control"
           value={this.state.input}
           onChange={this.onInputChange}/>
