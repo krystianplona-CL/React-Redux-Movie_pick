@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import SearchBar from "../containers/SearchBar"
+import SearchBar from '../containers/SearchBar';
+import MoviesList from '../containers/MoviesList';
 
 class MainPage extends Component {
   render() {
@@ -8,7 +9,7 @@ class MainPage extends Component {
       <div>
         Welcome! Find your favourite movie and add it to you list.
         <SearchBar />
-        
+        <MoviesList />
       </div>
     );
   }
