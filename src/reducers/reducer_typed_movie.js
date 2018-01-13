@@ -1,4 +1,5 @@
 import { FETCH_MOVIE } from "../actions/fetchSelectedMovie";
+import { FETCH_MOVIE_LIST } from "../actions/fetchMovieList";
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -9,6 +10,8 @@ export default function(state = [], action) {
       else{
         return [action.payload.data, ...state];
       }
+    case FETCH_MOVIE_LIST:
+      return [action.payload.data, ...state];
     default:
       return state;
   }

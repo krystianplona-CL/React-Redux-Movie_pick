@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import '../style/App.css';
 
 import MainPage from './MainPage'
-import MovieList from './MovieList'
+import ListSubpage from './ListSubpage'
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
             return <MainPage/>
           }}/>
           <Route path="/movie_list" exact={true} render={() => {
-            return <MovieList/>
+            return <ListSubpage/>
           }}/>
         </div>
       </Router>
