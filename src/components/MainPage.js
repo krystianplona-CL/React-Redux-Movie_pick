@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import '../style/App.css';
+
+import SearchBar from "../containers/SearchBar"
 
 class MainPage extends Component {
   render() {
     return (
       <div>
-        Mainpage
+        Welcome! Find your favourite movie and add it to you list.
+        <SearchBar />
       </div>
     );
   }
