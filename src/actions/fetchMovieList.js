@@ -7,7 +7,7 @@ export const FETCH_MOVIE_LIST = 'FETCH_MOVIE_LIST';
 
 export function fetchMovieList() {
   const request = axios.get(ROOT_URL);
-  
+
   return {
     type: FETCH_MOVIE_LIST,
     payload: request

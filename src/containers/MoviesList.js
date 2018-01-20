@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import { connect } from 'react-redux';
 
 class MoviesList extends Component {
-  
+
   renderMovie(element) {
     if(element.Response === "False"){
       return null
@@ -15,7 +15,7 @@ class MoviesList extends Component {
       </tr>
     )
   }
-  
+
   render() {
     return (
       <table className="table table-hover">
@@ -25,7 +25,7 @@ class MoviesList extends Component {
             <th>Released</th>
             <th>Runtime</th>
           </tr>
-        </thead> 
+        </thead>
         <tbody>
           {this.props.selectedMovie.map(this.renderMovie)}
         </tbody>
@@ -35,7 +35,7 @@ class MoviesList extends Component {
 }
 
 function mapStateToProps({ selectedMovie }){
-  return { selectedMovie } // { selectedMovie: selectedMovie}
+  return { selectedMovie }
 }
 
 export default connect(mapStateToProps)(MoviesList)
