@@ -3,19 +3,22 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import getListByUserId from '../../actions/getListByUserId'
 
+import LogOut from './../../components/LogOut'
+
 class UserList extends Component {
     constructor(props){
         super(props);
         this.state = {
 
         }
-        const user = document.cookie.split('myAppUser=')[1]
+        const user = document.cookie.split(';').filter((e,i)=>{
+            return e.indexOf('myAppUser') >= 0
+        })[0].split('=')[1]
         this.props.getListByUserId(user)
     }
 
     renderList = () => {
         return Object.keys(this.props.listOfMovies).map((element, index)=>{
-            console.log(this.props.listOfMovies[element])
             return (
                 <li key={element}>
                     <span>Title: {this.props.listOfMovies[element].title}</span><br/>
@@ -27,11 +30,14 @@ class UserList extends Component {
 
     render(){
         return (
-            <div>
-                <h2>list</h2>
-                <ul>
-                    {this.renderList()}
-                </ul>
+            <div className='container'>
+                <LogOut />
+                <div>
+                    <h2>LIST OF YOUR MOVIES</h2>
+                    <ul>
+                        {this.renderList()}
+                    </ul>
+                </div>
             </div>
         )
     }

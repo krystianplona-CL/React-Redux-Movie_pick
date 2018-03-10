@@ -22,8 +22,8 @@ export default class MainPage extends Component {
     onFormSubmit = (event) => {
         event.preventDefault();
         const { firebase } = this.props;
-        const auth = Boolean(document.cookie.split('myAppAuth=')[1]);
-        auth && firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).then(data=>{
+        const auth = document.cookie.split('myAppAuth=')[1];
+        auth !== "true" && firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).then(data=>{
             document.cookie = 'myAppAuth=true'
             const user = data.email.split('@')[0]
             document.cookie = `myAppUser=${user}`
@@ -43,11 +43,14 @@ export default class MainPage extends Component {
     }
     
     render(){
-        const auth = Boolean(document.cookie.split('myAppAuth=')[1]);
+        const auth = document.cookie.split(';').filter((e,i)=>{
+            return e.indexOf('myAppAuth') >= 0
+        })[0].split('=')[1]
+        
         return (
         <div className='mainPage'>
             {
-                auth === true || this.state.message === 'ok' 
+                auth === "true"
                 ? <UserList/>
                 : <Fragment>
                     <h1>Log In</h1>
