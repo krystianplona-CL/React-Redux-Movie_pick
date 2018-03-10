@@ -4,6 +4,9 @@ import {bindActionCreators} from 'redux';
 import getListByUserId from '../../actions/getListByUserId'
 
 import LogOut from './../../components/LogOut'
+import AddNewMovie from './AddNewMovie'
+
+import './style.css'
 
 class UserList extends Component {
     constructor(props){
@@ -18,11 +21,14 @@ class UserList extends Component {
     }
 
     renderList = () => {
+        const objectKey = Object.keys(this.props.listOfMovies)[0]
+
         return Object.keys(this.props.listOfMovies).map((element, index)=>{
             return (
                 <li key={element}>
                     <span>Title: {this.props.listOfMovies[element].title}</span><br/>
-                    <span>year: {this.props.listOfMovies[element].year}</span>
+                    <span>year: {this.props.listOfMovies[element].year}</span><br/>
+                    <span>genre: {this.props.listOfMovies[element].genre}</span><br/>
                 </li>
             )
         })
@@ -32,9 +38,10 @@ class UserList extends Component {
         return (
             <div className='container'>
                 <LogOut />
+                <AddNewMovie show='true'/>
                 <div>
                     <h2>LIST OF YOUR MOVIES</h2>
-                    <ul>
+                    <ul className='list'>
                         {this.renderList()}
                     </ul>
                 </div>

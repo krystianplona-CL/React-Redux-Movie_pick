@@ -7,7 +7,6 @@ export default class LogOut extends Component {
 
         }
     }
-
     onButtonClick = (event) => {
         event.preventDefault();
         document.cookie = "myAppAuth=false"
