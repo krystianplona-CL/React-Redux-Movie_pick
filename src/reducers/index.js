@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import selectedMovie from "./reducer_typed_movie";
-import userList from "./reducer_typed_movie";
+import ListByUserIdReducer from './reducer_listByUserId'
 
 const rootReducer = combineReducers({
-  selectedMovie: selectedMovie,
-  userList: userList
+    listByUserId: ListByUserIdReducer
 });
 
 export default rootReducer;
