@@ -49,7 +49,16 @@ class AddNewMovie extends Component {
                 <form>
                     <input type="text" placeholder='title' onChange={this.onChange} name='title'></input>
                     <input type="text" placeholder='year' onChange={this.onChange} name='year'></input>
-                    <input type="text" placeholder='genre' onChange={this.onChange} name='genre'></input>
+                    <select name='genre' onChange={this.onChange}>
+                        <option value="" diabled="true">Choose genre</option>
+                        <option value="SCI-FI">SCI-FI</option>
+                        <option value="drama">drama</option>
+                        <option value="comedy">comedy</option>
+                        <option value="fantasy">fantasy</option>
+                        <option value="horror">horror</option>
+                        <option value="thriller">thriller</option>
+                        <option value="other">other</option>
+                    </select>
                     <button type='submit' onClick={this.onSubmitClick}>Add</button>
                 </form>
             )

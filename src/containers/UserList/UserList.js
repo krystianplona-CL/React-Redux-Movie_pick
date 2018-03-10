@@ -5,8 +5,9 @@ import getListByUserId from '../../actions/getListByUserId'
 
 import LogOut from './../../components/LogOut'
 import AddNewMovie from './AddNewMovie'
-
+import ListItem from './../../components/MainPage/ListItem/ListItem'
 import './style.css'
+import axios from 'axios'
 
 class UserList extends Component {
     constructor(props){
@@ -19,17 +20,29 @@ class UserList extends Component {
         })[0].split('=')[1]
         this.props.getListByUserId(user)
     }
+    removeMovie = (event, itemToRemove) => {
+        event.preventDefault();
+
+        const ROOT_URL = `https://movie-picker-ff027.firebaseio.com/`;
+        const user = document.cookie.split(';').filter((e,i)=>{
+            return e.indexOf('myAppUser') >= 0
+        })[0].split('=')[1]
+
+        axios({
+            method: 'delete',
+            url: `${ROOT_URL}/${user}/${itemToRemove}.json`,
+        }).then((response)=>{
+            // this.props.getListByUserId(user)
+            document.location.reload();
+        })
+    }
 
     renderList = () => {
         const objectKey = Object.keys(this.props.listOfMovies)[0]
 
         return Object.keys(this.props.listOfMovies).map((element, index)=>{
             return (
-                <li key={element}>
-                    <span>Title: {this.props.listOfMovies[element].title}</span><br/>
-                    <span>year: {this.props.listOfMovies[element].year}</span><br/>
-                    <span>genre: {this.props.listOfMovies[element].genre}</span><br/>
-                </li>
+                <ListItem key={element} element={element} {...this.props} removeMovie={this.removeMovie}/>
             )
         })
     }
