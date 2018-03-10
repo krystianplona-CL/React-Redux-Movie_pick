@@ -25,6 +25,8 @@ export default class MainPage extends Component {
         const auth = Boolean(document.cookie.split('myAppAuth=')[1]);
         auth && firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).then(data=>{
             document.cookie = 'myAppAuth=true'
+            const user = data.email.split('@')[0]
+            document.cookie = `myAppUser=${user}`
             this.setState({message: 'ok'})
         }).catch((error)=>{
             switch(error.code){

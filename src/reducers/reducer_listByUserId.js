@@ -1,17 +1,15 @@
 import axios from 'axios'
 
-const ROOT_URL = `https://movie-picker-ff027.firebaseio.com/.json`;
-
-const listByUserId = (state = {}, action) => {
-    const request = axios.get(ROOT_URL).then(data=>{
-        if(data.status === 200){
-            return data.data
-        }
-        else{
+const listByUserId = (state = [], action) => {
+    switch(action.type){
+        case 'GET_LIST_BY_USER_ID': 
+            return {
+                ...state,
+                ...action.payload.data
+            }
+        default: 
             return state
-        }
-    })
-    return request
+    }
 }
 
 export default listByUserId

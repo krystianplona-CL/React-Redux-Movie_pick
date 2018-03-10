@@ -2,16 +2,26 @@ import React,{ Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import getListByUserId from '../../actions/getListByUserId'
+
 class UserList extends Component {
     constructor(props){
         super(props);
         this.state = {
 
         }
+        const user = document.cookie.split('myAppUser=')[1]
+        this.props.getListByUserId(user)
     }
+
     renderList = () => {
-        return this.props.listOfMovies.map((movie, index)=>{
-            return <li key={index}>{movie}</li>
+        return Object.keys(this.props.listOfMovies).map((element, index)=>{
+            console.log(this.props.listOfMovies[element])
+            return (
+                <li key={element}>
+                    <span>Title: {this.props.listOfMovies[element].title}</span><br/>
+                    <span>year: {this.props.listOfMovies[element].year}</span>
+                </li>
+            )
         })
     }
 
@@ -20,7 +30,7 @@ class UserList extends Component {
             <div>
                 <h2>list</h2>
                 <ul>
-                    {/* {this.renderList()} */}
+                    {this.renderList()}
                 </ul>
             </div>
         )
@@ -33,4 +43,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(UserList)
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ getListByUserId: getListByUserId }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserList)
